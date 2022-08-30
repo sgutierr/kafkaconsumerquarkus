@@ -13,6 +13,13 @@ This is the software required for running this example:
 
 # Demo steps:
 This application listens for records sent to the `device-temperatures` topic.
+## 0. Preparing certificate 
+  1. Extracting the cluster certificate from OCP, example from Kafka namespace:
+ **`oc extract secret/my-cluster-cluster-ca-cert --keys=ca.crt `**
+ 
+ 2. Generate a `truststore.jks` file with `password` as the store password. Store the KeyStore files in your workspace:
+ **`keytool -import -trustcacerts -alias root -file kafka-cluster.crt -keystore truststore.jks -storepass password -noprompt`**
+
 ## 1. Setting up connection
 By using your editor of choice, open the src/main/resources/application.properties file, and configure the following Kafka settings:
 Replace these variables by your correspondent environment variables: 
